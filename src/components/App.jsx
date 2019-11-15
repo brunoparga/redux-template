@@ -1,11 +1,12 @@
 import React from 'react';
+import Channels from '../containers/Channels';
+import Messages from '../containers/Messages';
 
-const App = () => {
-  return (
+const App = () => (
   <div className="app">
-      <p>React + Redux starter</p>
+    <Channels />
+    <Messages />
   </div>
 );
-};
 
 export default App;
