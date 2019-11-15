@@ -2,10 +2,10 @@ import React from 'react';
 
 const App = () => {
   return (
-    <div className="app">
+  <div className="app">
       <p>React + Redux starter</p>
-    </div>
-  );
+  </div>
+);
 };
 
 export default App;
