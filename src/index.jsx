@@ -10,8 +10,16 @@ import '../assets/stylesheets/application.scss';
 import initialState from '../data/initial-state';
 
 // State and reducers
+import currentUserReducer from './reducers/current-user-reducer';
+import channelsReducer from './reducers/channels-reducer';
+import selectedChannelReducer from './reducers/selected-channel-reducer';
+import messagesReducer from './reducers/messages-reducer';
+
 const reducers = combineReducers({
-  changeMe: (state = null, action) => state
+  currentUser: currentUserReducer,
+  channels: channelsReducer,
+  selectedChannel: selectedChannelReducer,
+  messages: messagesReducer,
 });
 
 // render an instance of the component in the DOM
