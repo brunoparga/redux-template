@@ -1,29 +1,35 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Message from '../components/Message';
 import MessageForm from '../containers/MessageForm';
+import { fetchMessages } from '../actions';
 
-// const Messages = ({ messages }) => {
-const Messages = () => {
-  const messages = [
-    {
-      author: 'Bruno',
-      time: (new Date(Date.now() - 60000)),
-      content: 'Hello World!',
-    },
-    {
-      author: 'Someone else',
-      time: (new Date(Date.now() - 30000)),
-      content: 'Geez that\'s so cliche',
-    },
-  ];
-  const messageList = messages.map(msg => <Message msg={msg} key={msg.time} />);
-  return (
-    <div className="messages">
-      <h3>Channel #chan</h3>
-      {messageList}
-      <MessageForm />
-    </div>
-  );
-};
+class Messages extends React.Component {
+  componentWillMount() {
+    const { channel, fetchMessages: messageFetcher } = this.props;
+    messageFetcher(channel);
+  }
+  render() {
+    const { channel, messages } = this.props;
+    const messageList = messages.map(msg => <Message msg={msg} key={msg.id} />);
+    return (
+      <div className="messages">
+        <h3>Channel {channel}</h3>
+        {messageList}
+        <MessageForm />
+      </div>
+    );
+  }
+}
 
-export default Messages;
+const mapStateToProps = state => ({
+  messages: state.messages,
+  channel: state.selectedChannel,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  { fetchMessages }, dispatch,
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Messages);
