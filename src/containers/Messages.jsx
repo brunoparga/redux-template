@@ -15,9 +15,14 @@ class Messages extends React.Component {
   componentDidMount() {
     // eslint-disable-next-line no-shadow
     const { channel, fetchMessages } = this.props;
+    // TODO: replace this sh*t with websockets
     const interval = window.setInterval(() => fetchMessages(channel), 3333);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ interval });
+  }
+
+  componentDidUpdate() {
+    this.messageList.scrollTop = this.messageList.scrollHeight;
   }
 
   componentWillUnmount() {
@@ -28,9 +33,11 @@ class Messages extends React.Component {
     const { channel, messages } = this.props;
     const messageList = messages.map(msg => <Message msg={msg} key={msg.id} />);
     return (
-      <div className="messages">
+      <div className="messages-container">
         <h3>Channel {channel}</h3>
-        {messageList}
+        <div className="messages" ref={(list) => { this.messageList = list; }}>
+          {messageList}
+        </div>
         <MessageForm />
       </div>
     );

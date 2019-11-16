@@ -1,7 +1,14 @@
 body {
   font-family: Helvetica;
+  max-height: 100vh;
 }
+
 .app {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.messages {
+  max-height: 70vh;
+  overflow-y: scroll;
 }
