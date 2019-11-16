@@ -11,6 +11,19 @@ class Messages extends React.Component {
     const { channel, fetchMessages } = this.props;
     fetchMessages(channel);
   }
+
+  componentDidMount() {
+    // eslint-disable-next-line no-shadow
+    const { channel, fetchMessages } = this.props;
+    const interval = window.setInterval(() => fetchMessages(channel), 3333);
+    // eslint-disable-next-line react/no-did-mount-set-state
+    this.setState({ interval });
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.state.interval);
+  }
+
   render() {
     const { channel, messages } = this.props;
     const messageList = messages.map(msg => <Message msg={msg} key={msg.id} />);
