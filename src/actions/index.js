@@ -1,5 +1,6 @@
 export const FETCH_MESSAGES = 'FETCH_MESSAGES';
 export const CREATE_MESSAGE = 'CREATE_MESSAGE';
+export const SELECT_CHANNEL = 'SELECT_CHANNEL';
 
 export const fetchMessages = channel => dispatch =>
   fetch(`http://localhost:3000/${channel}/messages`)
@@ -19,3 +20,7 @@ export const createMessage = (channel, author, content) => (dispatch) => {
     .then(res => res.json())
     .then(payload => dispatch({ type: CREATE_MESSAGE, payload }));
 };
+
+export const selectChannel = channel => ({
+  type: SELECT_CHANNEL, payload: channel,
+});

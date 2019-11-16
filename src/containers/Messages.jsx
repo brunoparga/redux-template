@@ -6,23 +6,21 @@ import MessageForm from '../containers/MessageForm';
 import { fetchMessages } from '../actions';
 
 class Messages extends React.Component {
-  componentWillMount() {
-    // eslint-disable-next-line no-shadow
-    const { channel, fetchMessages } = this.props;
-    fetchMessages(channel);
-  }
-
   componentDidMount() {
     // eslint-disable-next-line no-shadow
     const { channel, fetchMessages } = this.props;
     // TODO: replace this sh*t with websockets
-    const interval = window.setInterval(() => fetchMessages(channel), 3333);
+    const interval = window.setInterval(() => fetchMessages(channel), 10000);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ interval });
   }
 
   componentDidUpdate() {
     this.messageList.scrollTop = this.messageList.scrollHeight;
+    // TODO: prevent this from updating infinitely
+    // eslint-disable-next-line no-shadow
+    const { channel, fetchMessages } = this.props;
+    fetchMessages(channel);
   }
 
   componentWillUnmount() {
