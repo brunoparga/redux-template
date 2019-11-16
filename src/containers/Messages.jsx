@@ -6,6 +6,10 @@ import MessageForm from '../containers/MessageForm';
 import { fetchMessages } from '../actions';
 
 class Messages extends React.Component {
+  componentWillMount() {
+    this.props.fetchMessages(this.props.selectedChannel);
+  }
+  
   componentDidMount() {
     // eslint-disable-next-line no-shadow
     const { channel, fetchMessages } = this.props;
@@ -17,10 +21,6 @@ class Messages extends React.Component {
 
   componentDidUpdate() {
     this.messageList.scrollTop = this.messageList.scrollHeight;
-    // TODO: prevent this from updating infinitely
-    // eslint-disable-next-line no-shadow
-    const { channel, fetchMessages } = this.props;
-    fetchMessages(channel);
   }
 
   componentWillUnmount() {
