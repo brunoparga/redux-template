@@ -7,8 +7,9 @@ import { fetchMessages } from '../actions';
 
 class Messages extends React.Component {
   componentWillMount() {
-    const { channel, fetchMessages: messageFetcher } = this.props;
-    messageFetcher(channel);
+    // eslint-disable-next-line no-shadow
+    const { channel, fetchMessages } = this.props;
+    fetchMessages(channel);
   }
   render() {
     const { channel, messages } = this.props;
